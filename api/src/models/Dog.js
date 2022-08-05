@@ -15,16 +15,28 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     weight:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     height:{ 
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    life_span:{
+    lifeSpan:{
       type:DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    },
+    temperaments:{
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    image:{
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    from:{
+    type: DataTypes.STRING,
+    defaultValue: "DB",
     }
   });
 };
