@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       type:DataTypes.STRING,
       allowNull: true,
     },
-    temperaments:{
+    temperament:{
       type: DataTypes.STRING,
       allowNull: true,
     },

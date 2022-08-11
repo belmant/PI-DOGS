@@ -37,23 +37,25 @@ const apiDog = async (req, res) => {
 //Ruta Post (Crear Perro)
 const createDog = async (req, res) => {
   try {
-    const { name, height, weight, lifeSpan, temperaments, image } = req.body;
+    const { name, height, weight, lifeSpan, temperament, image } = req.body;
     /*- Crea una raza de perro en la base de datos relacionada con sus temperamentos */
-    if (!name || !height || !temperaments || !image)
+    if (!name || !height || !temperament)
       return res.status(400).json({ message: "information required!" });
     await Dog.create({
       name,
       image,
       height,
       weight,
-      temperaments,
+      temperament,
       lifeSpan,
     });
     let dbDog = await Dog.findAll(); // {} => longitud === 0
     let dbDogLength = Object.keys(dbDog).length;
     if (dbDogLength !== 0) {
+      let noRepeat = {};
       dbContenido = dbContenido.concat(dbDog);
-    }
+      dbContenido = dbContenido.filter((p) =>
+      noRepeat[p.id]? false:(noRepeat[p.id]= true))}
     return res.status(200).send("Perro creado con exito");
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -63,29 +65,19 @@ const createDog = async (req, res) => {
 
 //Ruta por Query
 const apiNames = async (req, res) => {
-  try{
-  let infoApi = await getInfo();
-  let info = infoApi.map((el) => {
-    return {
-      id: el.id,
-      name: el.name,
-      height: el.height.metric,
-      weight: el.weight.mentric,
-      lifeSpan: el.life_span,
-      temperament: el.temperament,
-    };
-  });
-  const DogMatch = info.filter((p) =>
-    p.name.toLowerCase().includes(req.query.name.toLowerCase())
-  );
-  if (DogMatch.length === 0) {
-    return res.status(404).json({ message: "Dog Not Found" });
-  } else {
-    return res.status(200).json(DogMatch);
-  }}catch(error){
-  res.status(500).json({msg: error.message})
-  }
-};
+  try {
+    let dogName = req.query.name;
+    let content = dbContenido;
+    let dogMatched = content.filter((p) =>
+      p.name.toLowerCase().includes(dogName.toLowerCase())
+    );
+    let dogMatchedLength = Object.keys(dogMatched).length;
+    if (dogMatchedLength === 0)
+      return res.status(404).json({ message: "Dog not found :(" });
+    return res.status(200).json(dogMatched);
+  } catch (error) { return res.status(500).json({ message: error.message})
+  }};
+
 
 //Ruta Id
 const getId = async (req, res) => {
