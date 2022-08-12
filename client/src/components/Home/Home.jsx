@@ -1,11 +1,20 @@
 import React from "react"
 import {useState, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {filterTemperaments, getDogs, getTemperaments, filterCreated, orderByName} from "../../actions"
+import {getDogs,
+        filterTemperaments, 
+        getTemperaments, 
+        filterCreated, 
+        orderByName,
+        orderByWeight} from "../../actions"
 import {Link} from "react-router-dom"
 import Card from "../Card/Card"
 import Paginado from "../Paginado/Paginado"
 import SearchBar from "../SearchBar/SearchBar"
+import "./Home.css"
+import Dog from "../Dog/Dog"
+
+
 
 
 
@@ -56,6 +65,13 @@ const dispatch = useDispatch()
         setOrden(`Ordenado ${e.target.value}`)
     }
 
+    function handleSortWeight(e){
+        e.preventDefault();
+        dispatch(orderByWeight(e.target.value));
+        setCurrentPage(1); //Lo seteo desde la pagina 1 para que arranque a ordenar alfabeticamente
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+
     return(
 
         <div>
@@ -66,24 +82,23 @@ const dispatch = useDispatch()
                 </button>
             <div>
             <form id= "refreshAllTemp">
-            <select onChange ={(e) => {handleFilterCreated(e)}} >
+                <select onChange ={(e) => {handleFilterCreated(e)}} >
                     <option value = "all"> All </option>
                     <option value = "existent"> Existents </option>
                     <option value = "from"> Created </option>
                 </select>
 
-                <select  onChange ={(e) =>{handleSort(e)}}>
-                    <option value = 'asc'> A - Z </option>
-                    <option value = 'desc'> Z - A </option>
+                    <select  onChange ={(e) =>{handleSort(e)}}>
+                        <option value = 'asc'> A - Z </option>
+                        <option value = 'desc'> Z - A </option>
                     </select>
 
-                    <select >
-                    <option value = 'weignt_min'> Weight min </option>
-                    <option value = 'weignt_max'> Weight max </option>
+                    <select onChange ={(e) =>{handleSortWeight(e)}}>
+                    <option value = 'min'> Weight Min </option>
+                    <option value = 'max'> Weight Max </option>
                 </select>
 
-
-                <select onChange ={(e)=> handleTempFilter(e)}>
+                <select onChange ={(e) => {handleTempFilter(e)}}>
                     <option value = "temperaments" > All Temperaments </option>
                     {allTemperaments?.map((t)=>{
                         return(
@@ -100,21 +115,17 @@ const dispatch = useDispatch()
                 allDogs = {allDogs.length} // se le pasa asi porque necesito un valor numerico
                 paginado = {paginado}
             />
-
             <SearchBar/>
-
-            {currentDogs?.map((el)=>{
+            </div>
+            <div className = "containerCard">
+            {
+            currentDogs?.map((el)=>{
                 return(
-                    <div key = {el.id}>
-                    <Link to = {"/home"+el.id} >
-                            <Card name={el.name} image={el.image} temperament={el.temperament}
-                            weight={el.weight}/>
-                    </Link>
-                    </div>
-                );
-            })}
+                <Dog 
+                id = {el.id} name ={el.name} image ={el.image} 
+                temperament={el.temperament} weight = {el.weight}
+                />
+                )})}
             </div>
             </div>
-            
-        )
-};
+            )}

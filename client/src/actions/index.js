@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import axios from "axios"
 
 
@@ -23,13 +24,6 @@ export function getNameDogs(name){
             console.log(error)
         }
     }
-}
-
-export function getTemps(){
-    return async function(dispatch){
-        var info = await axios.get(`http://localhost:3001/temperamento`)
-        return dispatch({type: 'GET_TEMPERAMENTS', payload:info.json})
-    }
 };
 
 export function getTemperaments(){
@@ -42,13 +36,6 @@ export function getTemperaments(){
     }
 };
 
-export function postDogs(payload){
-    return async function(){
-        const response = axios.post(`http://localhost:3001/dogs`,payload)
-        console.log(response)
-        return response;
-    }
-};
 
 export function filterTemperaments(payload){
     return{
@@ -70,3 +57,24 @@ export function orderByName(payload){
         payload
     }
 };
+
+export function orderByWeight(payload){
+    return{
+        type: 'ORDER_BY_WEIGHT',
+        payload
+    }
+};
+
+export function getDogsById(id){
+    console.log(id);
+    try{
+        return async function(dispatch){
+            var json = await axios.get(`http://localhost:3001/dogs/${id}`);
+            return dispatch({
+                type: 'GET_DOGS_BY_ID', 
+                payload: json.data})
+        };
+    }catch(e){
+        console.log(e);
+    }
+}

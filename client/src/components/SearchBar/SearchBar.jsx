@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { getNameDogs } from '../../actions';
-
+import "./SearchBar.css"
 
 
 export default function SearchBar(){
@@ -10,7 +10,7 @@ export default function SearchBar(){
     const [name,setName] = useState(" ")
 
 
-    function handleImputChange(e){
+    function handleInputChange(e){
         e.preventDefault()
         setName(e.target.value)
     };
@@ -22,13 +22,12 @@ export default function SearchBar(){
 
 
     return(
-        <div>
+        <div className = "searchBar">
             <input
             type = 'text'
             placeholder = "Buscar.."
-            onChange = {(e)=> handleImputChange(e)}
+            onChange = {(e)=> handleInputChange(e)} onClick = {(e)=> handleSubmit(e)}
             />
-            <button type = "submit" onClick = {(e)=> handleSubmit(e)}>Buscar</button>
         </div>
     )
 };
