@@ -1,4 +1,6 @@
 import React from "react";
+import "./Paginado.css"
+
 
 export default function paginado({dogsPerPage, allDogs, paginado}){
     const pageNumbers = []

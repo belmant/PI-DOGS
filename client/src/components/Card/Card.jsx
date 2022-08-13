@@ -1,9 +1,9 @@
 import React from "react"
-import "./Card.css"
+import "./card.css"
 
-export default function DogCard({name,image,temperament,weight}){
+export default function DogCard({name,image,temperament,weight,id}){
     return(
-        <div className = "card">
+        <div key ={id} className = "card">
             <div>
             <h3>{name}</h3>
             <img className = "imgCard" src={`${image}`} alt = "Img Not Found"/>

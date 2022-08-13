@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { getNameDogs } from '../../actions';
-import "./SearchBar.css"
+import "./searchBar.css"
 
 
 export default function SearchBar(){

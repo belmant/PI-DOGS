@@ -27,10 +27,10 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
             }
-        case 'GET_DOGS_BY_ID':
+        case 'GET_DETAIL':
                 return{
                     ...state,
-                    dogDetail: state.payload,
+                    dogDetail: action.payload,
                 }
         case 'FILTER_TEMPERAMENT':
             const allDogs = state.allDogs;

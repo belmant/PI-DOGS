@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import DogCard from '../Card/Card'
-import "./Dog.css"
+import "./dog.css"
 
 
 function Dog({id, name, image, temperament, weight}) {
@@ -9,7 +9,7 @@ function Dog({id, name, image, temperament, weight}) {
     <>
 <div>
 <div key = {id} >
-<Link to = {"/home"+id} >
+<Link to = {"/dogs/"+id} >
         <DogCard name={name} image={image} temperament={temperament}
         weight={weight}/>
 </Link>
