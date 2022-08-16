@@ -13,5 +13,4 @@ export default function DogCard({name,image,temperament,weight,id}){
         </div>
         
     );
-
 };

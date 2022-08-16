@@ -19,7 +19,6 @@ export default function Home(){
     const allTemperaments = useSelector((state) => state.temperaments)
     const allDogs = useSelector((state)=> state.dogs)
 
-
     const [currentPage, setCurrentPage] = useState(1)//Aca guardo en un estado local la pagina actual (q arranca en 1)
     const [orden, setOrden] = useState("") //estado local vacio, que se usa para que cuando seteo la pagina me modifique el estado local y se rederice  
 

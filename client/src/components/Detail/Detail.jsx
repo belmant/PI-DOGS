@@ -35,29 +35,3 @@ return(
     </div>
 )
 };
-
-
-
-
-// export default function dogsDetails(){
-// const dispatch = useDispatch();
-// const {id} = useParams();
-
-// useEffect(()=>{
-//     dispatch(getDogsById(id))
-// },[id,dispatch])
-
-
-// const{name, 
-//     image,
-//     temperament,
-//     weight,
-//     height,
-//     life_span} = useSelector((state)=> state.dogsDetails);
-    
-//     return(
-//         <>
-        
-//         </>
-//     )
-// };

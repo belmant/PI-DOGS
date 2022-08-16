@@ -34,10 +34,7 @@ function rootReducer(state = initialState, action) {
                 }
         case 'FILTER_TEMPERAMENT':
             const allDogs = state.allDogs;
-            let dogsTemp = allDogs.map(function (p){
-                if (p.temperament) return p
-            });
-            dogsTemp = dogsTemp.filter((p) => p !== undefined);
+            const dogsTemp = allDogs.filter((p)=> p.temperament)
             const statusFilter = action.payload === "temperaments" ? allDogs
                 : dogsTemp.filter((p) => p.temperament.includes(action.payload))
             return {
@@ -77,36 +74,13 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 dogs: sortdArr
             }
-        // case 'ORDER_BY_WEIGHT':
-        //     const dataDogs = state.dogs;
-        //     const sortArrWeight = action.payload === "min"
-        //     ? dataDogs.sort(function (a, b){
-        //         if(a.weight.split(" - ")[1] > b.weight.split(" - ")){
-        //             return 1;
-        //         }
-        //         if(b.weight.split(" - ")[1] < a.weight.split(" - ")){
-        //             return -1;
-        //         }
-        //         return 0;
-        //     })
-        //     : dataDogs.sort(function (a, b){
-        //         if(a.weight.split(" - ")[1] > b.weight.split(" - ")){
-        //             return -1;
-        //         }
-        //         if(b.weight.split(" - ")[1] < a.weight.split(" - ")){
-        //             return 0;
-        //         }
-        //     });
-        // return{
-        //     ...state,
-        //     dogs:sortArrWeight
-
         case 'ORDER_BY_WEIGHT':
-            const dataDogs = state.dogs;
-            const sortArrWeight = action.payload === "min" ?
-                dataDogs.sort((a, b) => { return a.weight.split(" - ") - b.weight.split(" - ") ? 1 : -1 })
-                :
-                dataDogs.sort((a, b) => { return a.weight.split(" - ") + b.weight.split(" - ") ? -1 : 1 })
+            let sortArrWeight
+            if(action.payload === "min"){
+            sortArrWeight = state.dogs.sort((a,b)=> a.weight.split(" ")[0] - b.weight.split(" ")[0])
+        }else{
+            sortArrWeight = state.dogs.sort((a,b)=> b.weight.split(" ")[0] - a.weight.split(" ")[0])
+        }
             return {
                 ...state,
                 dogs: sortArrWeight,

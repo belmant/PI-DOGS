@@ -11,12 +11,12 @@ video{
 }
 
 body{
-    background: rgb(43, 44, 46);
+    background: rgb(167, 165, 165);
 }
 
 .titleLanding{
     font-family:Courier;
-    background: slategray;
+    background: rgb(127, 180, 184);
     height:fit-content;
     position: relative;
 }

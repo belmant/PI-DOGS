@@ -6,7 +6,7 @@ import videoLanding from "./videoLanding.mp4";
 export default function LandingPage() {
 return (
     <div>
-    <video loop autoPlay muted playsinline>
+    <video loop autoPlay muted playsInline>
         <source src={videoLanding} type="video/mp4" />
     </video>
     <div className="titleLanding">
@@ -14,7 +14,7 @@ return (
     </div>
     <div className="buttonLanding">
         <Link to="/home">
-        <button class="button-landing" role="button">Get Into</button>
+        <button class="button-landing">Get Into</button>
         </Link>
     </div>
     </div>
