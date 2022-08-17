@@ -1,14 +1,15 @@
 .searchBar input{
     background-color: #eee;
     border: none;
-    padding: 1rem;
+    padding: 5px;
+    padding-left: 10px;
     font-size: 1rem;
     width: 13em;
     border-radius: 1rem;
-    color: lightcoral;
+    color: SlateGray;
     box-shadow: 0 0.4rem #dfd9d9;
     cursor: pointer;
-};
+}
 .searchBar input:focus{
-    outline-color: lightcoral;
-};
+    outline-color: rgb(149, 140, 140);
+}

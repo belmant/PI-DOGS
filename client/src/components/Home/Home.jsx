@@ -53,6 +53,9 @@ export default function Home(){
 };
 
     function handleFilterCreated(e){
+        if(e === 0){
+            return ("Perro no encontrado")
+        };
         dispatch(filterCreated(e.target.value));
     };
 
@@ -73,12 +76,14 @@ export default function Home(){
     return(
 
         <div>
-                <Link to = "/dogs"> Create Dog </Link>
-                <h1>DOGS</h1>
-                <button onClick ={(e)=>{handleClick(e)}}>
+        <div className="header">
+                <Link className="linkCreate" to = "/dogs"> Create Dog </Link>
+                <h2>DOGS</h2>
+                <button className="btnRefresh" onClick ={(e)=>{handleClick(e)}}>
                     Refresh              
                 </button>
-        <div>
+        </div>
+        <div className = "formHome">
             <form id= "refreshAllTemp">
                 <select onChange ={(e) => {handleFilterCreated(e)}} >
                     <option value = "all"> All </option>
@@ -86,7 +91,7 @@ export default function Home(){
                     <option value = "from"> Created </option>
                 </select>
 
-                <select  onChange ={(e) =>{handleSort(e)}}>
+                <select onChange ={(e) =>{handleSort(e)}}>
                     <option value = 'asc'> A - Z </option>
                     <option value = 'desc'> Z - A </option>
                 </select>

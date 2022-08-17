@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postDogs, getTemperaments } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import "./dogCreate.css";
 
 export default function DogCreate() {
   const dispatch = useDispatch();
   const allTemperaments = useSelector((state) => state.temperaments);
   const history = useHistory();
   const [error, setError] = useState({});
-  const [msg, setMsg] = useState({exito: false, error:false})
+  const [msg, setMsg] = useState(false);
 
   const [input, setInput] = useState({
     name: "",
@@ -38,51 +39,51 @@ export default function DogCreate() {
   function validate(input) {
     const errors = {};
     if (!/^[a-zA-Z]+$/.test(input.name))
-      errors.name = "El nombre es requerido y debe ser solo letras";
+      errors.name = "El nombre es requerido";
 
     if (!/(https?:\/\/.*\.(?:png|jpg))/i.test(input.image))
       errors.image = "Ingrese Url valida";
 
     if (!/^[0-9]+$/.test(input.minWeight)) {
-      errors.minWeight = "Ingrese un peso minimo valido";
+      errors.minWeight = "Ingrese un peso minimo";
     } else {
       if (input.minWeight < 0 || input.minWeight > 10)
-        errors.minWeight = "Ingrese un peso minimo valido";
+        errors.minWeight = "Ingrese un peso minimo";
     }
 
     if (!/^[0-9]+$/.test(input.maxWeight)) {
-      errors.maxWeight = "Ingrese un peso maximo valido";
+      errors.maxWeight = "Ingrese un peso maximo";
     } else {
       if (input.maxWeight < 10 || input.maxWeight > 50)
-        errors.maxWeight = "Ingrese un peso maximo valido";
+        errors.maxWeight = "Ingrese un peso maximo";
     }
 
     if (!/^[0-9]+$/.test(input.minHeight)) {
-      errors.minHeight = "Ingrese una altura minima valida";
+      errors.minHeight = "Ingrese una altura minima";
     } else {
       if (input.minHeight < 0 || input.minHeight > 10)
-        errors.minHeight = "Ingrese una altura minima valida";
+        errors.minHeight = "Ingrese una altura minima";
     }
 
     if (!/^[0-9]+$/.test(input.maxHeight)) {
-      errors.maxHeight = "Ingrese una altura maxima valida";
+      errors.maxHeight = "Ingrese una altura maxima";
     } else {
       if (input.maxHeight < 10 || input.maxHeight > 30)
-        errors.maxHeight = "Ingrese una altura maxima valida";
+        errors.maxHeight = "Ingrese una altura maxima";
     }
 
     if (!/^[0-9]+$/.test(input.minlifeSpan)) {
-      errors.minlifeSpan = "Ingrese esperanza de vida minima valida";
+      errors.minlifeSpan = "Ingrese esperanza de vida minima";
     } else {
       if (input.minlifeSpan < 0 || input.minlifeSpan > 9)
-        errors.minlifeSpan = "Ingrese esperanza de vida minima valida";
+        errors.minlifeSpan = "Ingrese esperanza de vida minima";
     }
 
     if (!/^[0-9]+$/.test(input.maxlifeSpan)) {
-      errors.maxlifeSpan = "Ingrese esperanza de vida maxima valida";
+      errors.maxlifeSpan = "Ingrese esperanza de vida maxima";
     } else {
       if (input.maxlifeSpan < 10 || input.maxlifeSpan > 20)
-        errors.maxlifeSpan = "Ingrese esperanza de vida maxima valida";
+        errors.maxlifeSpan = "Ingrese esperanza de vida maxima";
     }
 
     return errors;
@@ -95,6 +96,7 @@ export default function DogCreate() {
   }
 
   function handleSelect(e) {
+    //   if(temperaments && e.temperaments === e.target.value)
     setInput({
       ...input,
       temperaments: [...input.temperaments, e.target.value],
@@ -105,75 +107,78 @@ export default function DogCreate() {
     e.preventDefault();
     setError(validate(input));
     // if (!Object.entries(error.length)){
-    setMsg({exito:true})
     dispatch(postDogs(sendToApi));
-    setMsg({error:false})
+    setMsg(true);
     // console.log("-",input.minWeight,"-")
     // console.log(typeof input.minWeight)
     // console.log(input.minWeight?.length)
-    if(!/^[a-zA-Z]+$/.test(input.name)){
-        setMsg({error:true})
-    };
+    if (!/^[a-zA-Z]+$/.test(input.name)) {
+      setMsg(false);
+    }
 
-    if(input.minWeight?.length === 0){
-        if(!/^[0-9]+$/.test(input.minWeight)){
-            setMsg({error:true})
-            }else{
-            if (input.minWeight < 0 || input.minWeight > 10)
-            {setMsg({error:true})}
+    if (input.minWeight?.length === 0) {
+      if (!/^[0-9]+$/.test(input.minWeight)) {
+        setMsg(false);
+      } else {
+        if (input.minWeight < 0 || input.minWeight > 10) {
+          setMsg(false);
         }
-    };
+      }
+    }
 
-    if(input.maxWeight?.length === 0){
-        if (!/^[0-9]+$/.test(input.maxWeight)){
-        setMsg({error:true})
-        }else{
+    if (input.maxWeight?.length === 0) {
+      if (!/^[0-9]+$/.test(input.maxWeight)) {
+        setMsg(false);
+      } else {
         if (input.maxWeight < 10 || input.maxWeight > 50)
-        setMsg({error:true})}
-    };
+        setMsg(false);;
+      }
+    }
 
-    if(input.minHeight?.length === 0){
-        if (!/^[0-9]+$/.test(input.minHeight)){
-        setMsg({error:true})
-        }else{
+    if (input.minHeight?.length === 0) {
+      if (!/^[0-9]+$/.test(input.minHeight)) {
+        setMsg(false);;
+      } else {
         if (input.minHeight < 0 || input.minHeight > 10)
-        setMsg({error:true})}
-    };
+        setMsg(false);;
+      }
+    }
 
-    if(input.maxHeight?.length === 0){
-    if (!/^[0-9]+$/.test(input.maxHeight)){
-        setMsg({error:true})
-    }else{
+    if (input.maxHeight?.length === 0) {
+      if (!/^[0-9]+$/.test(input.maxHeight)) {
+        setMsg(false);;
+      } else {
         if (input.maxHeight < 10 || input.maxHeight > 30)
-        setMsg({error:true})}
-    };
+          setMsg(false);
+      }
+    }
 
-    if(msg.exito === true){
-    setMsg({exito:true})
+    if (msg === true) {
+      setMsg(true);
       dispatch(postDogs(sendToApi));
-    //   setMsg({exito:false});
-      setMsg({error:false});
+      //   setMsg({exito:false});
+      // setMsg({ error: false });
 
-    setInput({
-      name: "",
-      image: "",
-      minHeight: "",
-      maxHeight: "",
-      minWeight: "",
-      maxWeight: "",
-      minlifeSpan: "",
-      maxlifeSpan: "",
-      temperaments: [],
-    });
-    };
-    setMsg({exito:true})
+      setInput({
+        name: "",
+        image: "",
+        minHeight: "",
+        maxHeight: "",
+        minWeight: "",
+        maxWeight: "",
+        minlifeSpan: "",
+        maxlifeSpan: "",
+        temperaments: [],
+      });
+    }
+    setMsg({ exito: true });
     setTimeout(() => {
-        history.push("/home");
+      history.push("/home");
     }, 3000);
-    
+
     // setMsg({exito:false});
-    setMsg({error:false});
-}
+    setMsg({ error: false });
+  }
 
   function handleDeleteTemp(e) {
     setInput({
@@ -183,13 +188,15 @@ export default function DogCreate() {
   }
 
   return (
-    <div>
-      <Link to="/home">
-        <button>Go back</button>
+    <div className="containerForm">
+      <Link className="link" to="/home">
+          <button className="goBack">Go back</button>
       </Link>
-      <h1>Create your Dog</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
+      <div className="createDog">
+        <h1>Create your Dog</h1>
+      </div>
+      <form className="color2" onSubmit={(e) => handleSubmit(e)}>
+        <div className="name">
           <label>Name:</label>
           <input
             type="text"
@@ -199,7 +206,7 @@ export default function DogCreate() {
           />
           {error.name && <span>{error.name}</span>}
         </div>
-        <div>
+        <div className="image">
           <label>Image:</label>
           <input
             type="text"
@@ -209,7 +216,7 @@ export default function DogCreate() {
           />
           {error.image && <span>{error.image}</span>}
         </div>
-        <div>
+        <div className="heightMin">
           <label>Height Min:</label>
           <input
             type="text"
@@ -219,7 +226,7 @@ export default function DogCreate() {
           />
           {error.minHeight && <span>{error.minHeight}</span>}
         </div>
-        <div>
+        <div className="heightMax">
           <label>Height Max:</label>
           <input
             type="text"
@@ -229,7 +236,7 @@ export default function DogCreate() {
           />
           {error.maxHeight && <span>{error.maxHeight}</span>}
         </div>
-        <div>
+        <div className="weightMin">
           <label>Weight Min:</label>
           <input
             type="text"
@@ -239,7 +246,7 @@ export default function DogCreate() {
           />
           {error.minWeight && <span>{error.minWeight}</span>}
         </div>
-        <div>
+        <div className="weightMax">
           <label>Weight Max:</label>
           <input
             type="text"
@@ -249,7 +256,7 @@ export default function DogCreate() {
           />
           {error.maxWeight && <span>{error.maxWeight}</span>}
         </div>
-        <div>
+        <div className="lifeSpanMin">
           <label>Life Span Min:</label>
           <input
             type="text"
@@ -259,7 +266,7 @@ export default function DogCreate() {
           />
           {error.minlifeSpan && <span>{error.minlifeSpan}</span>}
         </div>
-        <div>
+        <div className="lifeSpanMax">
           <label>Life Span Max:</label>
           <input
             type="text"
@@ -269,19 +276,21 @@ export default function DogCreate() {
           />
           {error.maxlifeSpan && <span>{error.maxlifeSpan}</span>}
         </div>
-        <div>
+        <div className="selectTemp">
+        <label>Temperament:</label>
           <select onChange={(e) => handleSelect(e)}>
             {allTemperaments.map((tmp) => (
               <option value={tmp.name}>{tmp.name}</option>
             ))}
           </select>
           {input.temperaments?.map((p) => (
-            <span onClick={() => handleDeleteTemp(p)}>{p + " "}</span>
+            <span onClick={() => handleDeleteTemp(p)}>{p + " ,"}</span>
           ))}
-          <button type="submit">Create new breed!</button>
-          {msg.exito && <span>Perro creado exitosamente</span>}
-          {msg.error && <span>Datos invalidos</span>}
         </div>
+        <div className="btnBreed">
+        <button className="createBreed" type="submit">Create new breed!</button>
+            {msg && <span >Perrro creado exitosamente</span>}
+            </div>
       </form>
     </div>
   );

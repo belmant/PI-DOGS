@@ -10,11 +10,11 @@ return (
         <source src={videoLanding} type="video/mp4" />
     </video>
     <div className="titleLanding">
-        <h1>Bienvenidos</h1>
+        <h1 className="bienvenidosH1">Bienvenidos</h1>
     </div>
-    <div className="buttonLanding">
+    <div>
         <Link to="/home">
-        <button class="button-landing">Get Into</button>
+        <button class="buttonLanding">Get Into</button>
         </Link>
     </div>
     </div>
