@@ -1,4 +1,4 @@
-.color1 {background-color: #005fb0;}
+.color1 {background-color: #408ed3;}
 .color2 {background-color: #717ecb;}
 .color3 {background-color: #bca7e9;}
 .color4 {background-color: #fcd6ff;}
@@ -33,14 +33,14 @@
 
 .createDog {
   margin: 20px;
-  font-family: Courier;
-  background: rgb(192, 192, 192);
+  font-family: "Poppins";
+  background: #408ed3;;
   /* height: fit-content; */
   width: 99.9%;
   left: 0%;
   background: linear-gradient(
-    rgb(255 255 255) 0%, 
-    rgb(131 133 125) 100% );
+    #bca7e9
+    #fcd6ff);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf',GradientType=0 );
 }
 

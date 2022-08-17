@@ -1,4 +1,3 @@
-/* eslint-disable no-unreachable */
 import axios from "axios"
 
 
@@ -25,6 +24,9 @@ export function getNameDogs(name){
         }
     }
 };
+
+
+
 
 export function getTemperaments(){
     return async function(dispatch){

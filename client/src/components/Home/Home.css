@@ -1,10 +1,4 @@
 .containerCard {
-  /* display:flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100vw;
-  flex-wrap: wrap;
-  gap: 45px; */
   margin-top: 3%;
   margin-left: 7%;
   display: grid;
@@ -20,6 +14,19 @@
   flex-direction: row;
   justify-content: space-around;
   height: 70px;
+}
+
+.dogs{
+  margin: 20px;
+  font-family: "Poppins";
+  background: #408ed3;;
+  /* height: fit-content; */
+  width: 99.9%;
+  left: 0%;
+  background: linear-gradient(
+    #bca7e9
+    #fcd6ff);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf',GradientType=0 );
 }
 
 .formHome{

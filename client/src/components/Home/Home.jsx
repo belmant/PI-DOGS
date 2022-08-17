@@ -32,13 +32,12 @@ export default function Home(){
         setCurrentPage(pagNumber)
     };
 
-
-    useEffect(()=>{ //---> llena el estado cuando se monta el componente
+    useEffect(()=>{ 
         dispatch(getDogs());
     },[dispatch])
 
-    useEffect(()=>{ //---> llena el estado cuando se monta el componente
-        dispatch(getTemperaments()); // es lo mismo que hacer el map dispatch to props;
+    useEffect(()=>{ 
+        dispatch(getTemperaments());
     },[dispatch])
 
 
@@ -69,7 +68,7 @@ export default function Home(){
     function handleSortWeight(e){
         e.preventDefault();
         dispatch(orderByWeight(e.target.value));
-        setCurrentPage(1); //Lo seteo desde la pagina 1 para que arranque a ordenar alfabeticamente
+        setCurrentPage(1); 
         setOrden(`Ordenado ${e.target.value}`)
     }
 
@@ -78,7 +77,7 @@ export default function Home(){
         <div>
         <div className="header">
                 <Link className="linkCreate" to = "/dogs"> Create Dog </Link>
-                <h2>DOGS</h2>
+                <h1 className="dogs">DOGS</h1>
                 <button className="btnRefresh" onClick ={(e)=>{handleClick(e)}}>
                     Refresh              
                 </button>
@@ -115,8 +114,7 @@ export default function Home(){
 
             <Paginado 
                 dogsPerPage = {dogsPerPage}
-                allDogs = {allDogs.length} // se le pasa asi porque necesito un valor numerico
-                paginado = {paginado} 
+                allDogs = {allDogs.length} 
             />
 
             <SearchBar/>

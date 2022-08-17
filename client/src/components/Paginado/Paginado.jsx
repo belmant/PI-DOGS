@@ -9,7 +9,7 @@ export default function paginado({dogsPerPage, allDogs, paginado}){
         pageNumbers.push(i+1)
     }
 
-    return( // este componente es el que renderiza los numeros en si 
+    return(
         <nav>
             <ul className="paginado">
                 { pageNumbers && 

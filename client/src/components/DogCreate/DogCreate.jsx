@@ -9,7 +9,6 @@ export default function DogCreate() {
   const allTemperaments = useSelector((state) => state.temperaments);
   const history = useHistory();
   const [error, setError] = useState({});
-  const [msg, setMsg] = useState(false);
 
   const [input, setInput] = useState({
     name: "",
@@ -96,7 +95,6 @@ export default function DogCreate() {
   }
 
   function handleSelect(e) {
-    //   if(temperaments && e.temperaments === e.target.value)
     setInput({
       ...input,
       temperaments: [...input.temperaments, e.target.value],
@@ -105,79 +103,25 @@ export default function DogCreate() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setError(validate(input));
-    // if (!Object.entries(error.length)){
-    dispatch(postDogs(sendToApi));
-    setMsg(true);
-    // console.log("-",input.minWeight,"-")
-    // console.log(typeof input.minWeight)
-    // console.log(input.minWeight?.length)
-    if (!/^[a-zA-Z]+$/.test(input.name)) {
-      setMsg(false);
-    }
-
-    if (input.minWeight?.length === 0) {
-      if (!/^[0-9]+$/.test(input.minWeight)) {
-        setMsg(false);
-      } else {
-        if (input.minWeight < 0 || input.minWeight > 10) {
-          setMsg(false);
-        }
-      }
-    }
-
-    if (input.maxWeight?.length === 0) {
-      if (!/^[0-9]+$/.test(input.maxWeight)) {
-        setMsg(false);
-      } else {
-        if (input.maxWeight < 10 || input.maxWeight > 50)
-        setMsg(false);;
-      }
-    }
-
-    if (input.minHeight?.length === 0) {
-      if (!/^[0-9]+$/.test(input.minHeight)) {
-        setMsg(false);;
-      } else {
-        if (input.minHeight < 0 || input.minHeight > 10)
-        setMsg(false);;
-      }
-    }
-
-    if (input.maxHeight?.length === 0) {
-      if (!/^[0-9]+$/.test(input.maxHeight)) {
-        setMsg(false);;
-      } else {
-        if (input.maxHeight < 10 || input.maxHeight > 30)
-          setMsg(false);
-      }
-    }
-
-    if (msg === true) {
-      setMsg(true);
-      dispatch(postDogs(sendToApi));
-      //   setMsg({exito:false});
-      // setMsg({ error: false });
-
-      setInput({
-        name: "",
-        image: "",
-        minHeight: "",
-        maxHeight: "",
-        minWeight: "",
-        maxWeight: "",
-        minlifeSpan: "",
-        maxlifeSpan: "",
-        temperaments: [],
-      });
-    }
-    setMsg({ exito: true });
+    validate(input);
+    if(Object.keys(validate(input)).length === 0){
+    dispatch(postDogs(sendToApi))
+    setInput({
+      name: "",
+      image: "",
+      minHeight: "",
+      maxHeight: "",
+      minWeight: "",
+      maxWeight: "",
+      minlifeSpan: "",
+      maxlifeSpan: "",
+      temperaments: [],
+    });
     setTimeout(() => {
       history.push("/home");
     }, 3000);
-
-    // setMsg({exito:false});
-    setMsg({ error: false });
+    ;}
+    setError(validate(input));
   }
 
   function handleDeleteTemp(e) {
@@ -289,7 +233,6 @@ export default function DogCreate() {
         </div>
         <div className="btnBreed">
         <button className="createBreed" type="submit">Create new breed!</button>
-            {msg && <span >Perrro creado exitosamente</span>}
             </div>
       </form>
     </div>

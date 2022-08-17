@@ -27,7 +27,7 @@ const temperamento = async (req, res) => {
 
         temp = temp.filter(Boolean)//Saco el temperamento null
 
-        //ahora siii, creamos la base de datoosss
+        //creamos la base de datoosss
         for (let i = 0; i < temp.length; i++) {
         let aux = temp[i];await Temperamento.bulkCreate([
             {
@@ -37,7 +37,6 @@ const temperamento = async (req, res) => {
         }
         dbContent = await Temperamento.findAll({order: [
             ['name', 'ASC']]}); //volvemos a hacerle un findAll()
-        // OJO CON EL AWAI!! antes lo tenía sin el y me devolvía: {}
         return res.status(200).json(dbContent); //retorna el contenido de la base de datos :D
     } else {
         //este else es por si ya existe la DB no haga llamado a la API de nuevo
